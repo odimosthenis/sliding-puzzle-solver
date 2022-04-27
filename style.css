@@ -1,0 +1,26 @@
+#container{
+    width:600px;
+    height:600px;
+    background-color: gray;
+    border: 10px solid rgb(0, 0, 0);
+    padding: 0;
+    position: relative;
+}
+
+.piece{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(236, 236, 236);
+    position: absolute;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.piece:hover{
+    transform: scale(102%);
+    z-index: 10;
+}
