@@ -35,7 +35,7 @@ function renderPuzzlie(puzzle, container,blockSize,size){
         block.innerHTML = `<b> ${item.value} </b>`
         block.classList.add('piece')
         block.addEventListener('click', ()=>{
-            move(puzzle,item,size)
+            move(puzzle,item,size, block)
         })
         container.append(block)
     }
@@ -58,7 +58,7 @@ function getRandomVals(size){
 
 
 
-function move(puzzle,item,size){
+function move(puzzle,item,size, block){
     console.log(this)
 
     let nowRow = getRow(item.position, size)
@@ -72,12 +72,28 @@ function move(puzzle,item,size){
 
     console.log(leftCol, rightCol, downRow, upRow)
     if ( leftCol!=-1 && puzzle[cordsToI(nowRow,leftCol,size)].value == 0){
+        block.classList.add('moveLeft');
+        setTimeout(()=>{
+            block.classList.remove('moveLeft');
+        },1000)
     }
     else if ( rightCol!=-1 && puzzle[cordsToI(nowRow,rightCol,size)].value == 0){
+        block.classList.add('moveRight');
+        setTimeout(()=>{
+            block.classList.remove('moveRight');
+        },1000)
     }
     else if ( downRow!=-1 && puzzle[cordsToI(downRow,nowCol,size)].value == 0){
+        block.classList.add('moveDown');
+        setTimeout(()=>{
+            block.classList.remove('moveDown');
+        },1000)
     }
     else if ( upRow!=-1 && puzzle[cordsToI(upRow,nowCol,size)].value == 0){
+        block.classList.add('moveUp');
+        setTimeout(()=>{
+            block.classList.remove('moveUp');
+        },1000)
     }
 
     

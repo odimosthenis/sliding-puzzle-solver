@@ -18,9 +18,29 @@
     align-items: center;
     font-size: 30px;
     cursor: pointer;
+    transition: transform 330ms linear;
+
 }
 
 .piece:hover{
-    transform: scale(102%);
     z-index: 10;
+border-color: red;
+}
+
+.moveLeft{
+    transform: translateX(-200px);
+}
+
+.moveRight{
+    transform: translateX(200px);
+}
+
+
+.moveDown{
+    transform: translateY(200px);
+}
+
+
+.moveUp{
+    transform: translateY(-200px);
 }
