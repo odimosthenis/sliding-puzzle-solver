@@ -1,15 +1,17 @@
+let nowPuzzle=[];
+const size=3;
+const containerSize = 300;
+const blockSize =  containerSize/size;
+
 window.onload = ()=>{
     const container = document.querySelector('#container');
-    const size = 3;// could be 2,3,4,5,6
-    const containerSize = 600;
-    const blockSize =  containerSize/size
-    let puzzle = []
 
     for (let i=0;i<size*size;i++){
 
-        puzzle.push({
+        nowPuzzle.push({
             value: i,
             position: i,
+            imageI: i,
             x: getCol(i,size) * blockSize  ,
             y: getRow(i,size) * blockSize
         })
@@ -17,25 +19,27 @@ window.onload = ()=>{
 
     const rand = getRandomVals(size);
     for(let i=0;i<size*size;i++){
-        puzzle[i].value = rand[i];
+        nowPuzzle[i].value = rand[i];
     }
 
-    renderPuzzlie(puzzle, container, blockSize, size)
+    renderPuzzlie(container)
 
 }
 
-function renderPuzzlie(puzzle, container,blockSize,size){
-    for (let item of puzzle){
-        if (item.value==0) continue;
+function renderPuzzlie(container){
+    for (let item of nowPuzzle){
+        // if (item.value==0) continue;
         const block = document.createElement('div')
         block.style.width = block.style.height = blockSize-2+'px';
         block.style.top = `${item.y}px`;
         block.style.left = `${item.x}px`;
-
-        block.innerHTML = `<b> ${item.value} </b>`
-        block.classList.add('piece')
+        let pos = getCol(item.value,size)*100+"px" + " "+getRow(item.value,size)*100 +"px"
+        block.style.backgroundPosition = pos;
+        if(item.value!=0) {
+            block.classList.add('piece');
+        }
         block.addEventListener('click', ()=>{
-            move(puzzle,item,size, block)
+            move(item,block, container)
         })
         container.append(block)
     }
@@ -58,8 +62,9 @@ function getRandomVals(size){
 
 
 
-function move(puzzle,item,size, block){
-    console.log(this)
+function move(item,block,container){
+    const smooth = 100
+    console.log(nowPuzzle)
 
     let nowRow = getRow(item.position, size)
     let nowCol = getCol(item.position, size)
@@ -71,29 +76,45 @@ function move(puzzle,item,size, block){
     let downRow = (nowRow>=size-1) ? -1 : nowRow + 1;
 
     console.log(leftCol, rightCol, downRow, upRow)
-    if ( leftCol!=-1 && puzzle[cordsToI(nowRow,leftCol,size)].value == 0){
+    if ( leftCol!=-1 && nowPuzzle[cordsToI(nowRow,leftCol,size)].value == 0){
         block.classList.add('moveLeft');
         setTimeout(()=>{
-            block.classList.remove('moveLeft');
-        },1000)
+            nowPuzzle[cordsToI(nowRow,leftCol,size)].value = 
+            nowPuzzle[cordsToI(nowRow,nowCol,size)].value;
+            nowPuzzle[cordsToI(nowRow,nowCol,size)].value = 0;
+            container.innerHTML = '';
+            renderPuzzlie(container)
+        },smooth)
     }
-    else if ( rightCol!=-1 && puzzle[cordsToI(nowRow,rightCol,size)].value == 0){
+    else if ( rightCol!=-1 && nowPuzzle[cordsToI(nowRow,rightCol,size)].value == 0){
         block.classList.add('moveRight');
         setTimeout(()=>{
-            block.classList.remove('moveRight');
-        },1000)
+            nowPuzzle[cordsToI(nowRow,rightCol,size)].value = 
+            nowPuzzle[cordsToI(nowRow,nowCol,size)].value;
+            nowPuzzle[cordsToI(nowRow,nowCol,size)].value = 0;
+            container.innerHTML = '';
+            renderPuzzlie(container)
+        },smooth)
     }
-    else if ( downRow!=-1 && puzzle[cordsToI(downRow,nowCol,size)].value == 0){
+    else if ( downRow!=-1 && nowPuzzle[cordsToI(downRow,nowCol,size)].value == 0){
         block.classList.add('moveDown');
         setTimeout(()=>{
-            block.classList.remove('moveDown');
-        },1000)
+            nowPuzzle[cordsToI(downRow,nowCol,size)].value = 
+            nowPuzzle[cordsToI(nowRow,nowCol,size)].value;
+            nowPuzzle[cordsToI(nowRow,nowCol,size)].value = 0;
+            container.innerHTML = '';
+            renderPuzzlie(container)
+        },smooth)
     }
-    else if ( upRow!=-1 && puzzle[cordsToI(upRow,nowCol,size)].value == 0){
+    else if ( upRow!=-1 && nowPuzzle[cordsToI(upRow,nowCol,size)].value == 0){
         block.classList.add('moveUp');
         setTimeout(()=>{
-            block.classList.remove('moveUp');
-        },1000)
+            nowPuzzle[cordsToI(upRow,nowCol,size)].value = 
+            nowPuzzle[cordsToI(nowRow,nowCol,size)].value;
+            nowPuzzle[cordsToI(nowRow,nowCol,size)].value = 0;
+            container.innerHTML = '';
+            renderPuzzlie(container)
+        },smooth)
     }
 
     

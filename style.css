@@ -1,10 +1,31 @@
+.grid{
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 300px;
+    row-gap: 20px;
+    column-gap: 20px;
+
+}
+
 #container{
-    width:600px;
-    height:600px;
+    width:300px;
+    height:300px;
     background-color: gray;
     border: 10px solid rgb(0, 0, 0);
+    border-radius: 5px;
     padding: 0;
     position: relative;
+    display: inline-block;
+}
+
+
+#model{
+    display: block;
+    width: 100px;
+    height:100px;
+    margin:0px 0px;
+    border-radius: 3px;
+    border: 2px solid black;
 }
 
 .piece{
@@ -18,29 +39,38 @@
     align-items: center;
     font-size: 30px;
     cursor: pointer;
-    transition: transform 330ms linear;
+    transition: transform 100ms linear;
+    background-image: url('img/pica.png');
+    background-size: 300px 300px;
+    width: 100px;
+    height: 100px;
 
 }
 
 .piece:hover{
     z-index: 10;
-border-color: red;
+    border-color: red;
 }
 
 .moveLeft{
-    transform: translateX(-200px);
+    transform: translateX(-100px);
 }
 
 .moveRight{
-    transform: translateX(200px);
+    transform: translateX(100px);
 }
 
 
 .moveDown{
-    transform: translateY(200px);
+    transform: translateY(100px);
 }
 
 
 .moveUp{
-    transform: translateY(-200px);
+    transform: translateY(-100px);
+}
+
+.empty{
+    background-color: gray ;
+    z-index: 11;
 }
