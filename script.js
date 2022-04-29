@@ -1,4 +1,5 @@
 let nowPuzzle=[];
+window.puzz = nowPuzzle;
 const size=3;
 const containerSize = 300;
 const blockSize =  containerSize/size;
@@ -60,8 +61,6 @@ function getRandomVals(size){
 }
 
 
-
-
 function move(item,block,container){
     const smooth = 100
     console.log(nowPuzzle)
@@ -119,3 +118,16 @@ function move(item,block,container){
 
     
 }
+
+function completed(puzzle){
+
+    for (let i=0;i<puzzle.length;i++){
+        for (let j=0;j<puzzle[i].length;j++){
+            console.log(puzzle[i][j])
+        }
+    }
+
+    return false;
+}
+
+window.comp = completed
