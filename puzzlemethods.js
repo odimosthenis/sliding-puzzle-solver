@@ -1,10 +1,22 @@
 function copyPuzzle(puzzle){
-    const newpuzzle=[];
+    const newpuzzle={};
 
     newpuzzle.grid = copyGrid(puzzle.grid);
-    newpuzzle.zero = {x:puzzle.zero.x, y:puzzle.zero.y}
+    newpuzzle.zero = {x:puzzle.zero.x, y:puzzle.zero.y};
+    newpuzzle.code = getpuzzlecode(newpuzzle);
+    newpuzzle.eval = evaluate(newpuzzle);
+    newpuzzle.path = puzzle.path;
+    newpuzzle.gen = puzzle.path;
 
     return newpuzzle;
+}
+
+function addToPath(moveY, moveX){
+    if (moveX==1) return 'R';
+    if (moveX==-1) return 'L';
+    if (moveY==1) return 'D';
+    if (moveY==-1) return 'U';
+    return '0'
 }
 
 function move(puzzle,moveY, moveX){
@@ -24,6 +36,9 @@ function move(puzzle,moveY, moveX){
     swap(newpuzzle.grid,puzzle.zero.y,puzzle.zero.x,puzzle.zero.y+moveY,puzzle.zero.x+moveX);
     newpuzzle.zero.x += moveX;
     newpuzzle.zero.y += moveY;
+    newpuzzle.code = getpuzzlecode(newpuzzle);
+    newpuzzle.path = puzzle.path + addToPath(moveY, moveX);
+    newpuzzle.gen = newpuzzle.gen+1;
     return newpuzzle;
 }
 
@@ -36,4 +51,39 @@ function randomize(puzzle,MOVES){
         if(newnewpuzzle!=null) newpuzzle=newnewpuzzle;
     };
     return newpuzzle;
+}
+
+function getpuzzlecode(puzzle){
+    let str = '';
+    for(let i=0;i<3;i++){
+        for(let j=0;j<3;j++){
+            str += puzzle.grid[i][j];
+        }
+    };
+    return str;
+}
+
+function isSolved(puzzle){
+    return puzzle.code =='012345678';
+}
+
+function evaluate(puzzle){
+    let sum=0;
+    for(let i=0;i<puzzle.grid.length;i++){
+        for(let j=0;j<puzzle.grid[i].length;j++){
+            if(puzzle.grid[i][j]!=0){
+                const shouldX = puzzle.grid[i][j]%3;
+                const shouldY = Math.floor(puzzle.grid[i][j]/3)
+                const distance = Math.abs(shouldX-j) + Math.abs(shouldY-i)
+                sum+=distance;
+            }
+        }
+    }
+    return sum; 
+}
+
+function comparePuzzles(a,b){
+    if(a.eval > b.eval) return -1;
+    else if (a.eval < b.eval) return 1;
+    else return 0
 }

@@ -1,15 +1,23 @@
-let rnd = ()=>Math.floor(Math.random() * 3)-1
+let rnd = ()=>Math.floor(Math.random() * 3)-1 ;
 
 // get the completed array
 
 let puzzle = {
     grid: getSolvedGrid(3),
-}
-puzzle.zero = findZero(puzzle.grid)
+};
+puzzle.zero = findZero(puzzle.grid);
+puzzle = randomize(puzzle,100);
 
-puzzle = randomize(puzzle,31)
+puzzle.zero = findZero(puzzle.grid);
+puzzle.code = getpuzzlecode(puzzle);
+puzzle.eval = evaluate(puzzle);
+puzzle.path = '';
+puzzle.gen=0;
 
-printGrid(puzzle.grid)
+printGrid(puzzle.grid);
+let solution = solve(puzzle);
+console.log(solution)
+
 
 
 
