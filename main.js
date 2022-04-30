@@ -2,7 +2,7 @@ const SIZE=3
 
 window.onload = ()=>{
 
-    let puzzle = randomPuzzle(100)
+    let puzzle = randomPuzzle(400)
     printGrid(puzzle.grid)
     renderPuzzle(puzzle)
 
