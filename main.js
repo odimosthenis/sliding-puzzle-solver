@@ -7,7 +7,7 @@ window.onload = ()=>{
     renderPuzzle(puzzle)
 
     document.querySelector('#shuffle').addEventListener('click',()=>{
-        puzzle = randomPuzzle(100)
+        puzzle = randomPuzzle(400)
         printGrid(puzzle.grid)
         renderPuzzle(puzzle)
     });
@@ -23,10 +23,9 @@ window.onload = ()=>{
         puzzle.zero = findZero(puzzle.grid);
         puzzle.code = getpuzzlecode(puzzle);
         puzzle.eval = evaluate(puzzle);
-
-        console.log(puzzle)
+        const orgnl = copyPuzzle(puzzle);
         const sol = solve(puzzle)
-        console.log(sol)
+        if(sol.path!='')renderSolution(orgnl,sol.path)
     });
 
 }
