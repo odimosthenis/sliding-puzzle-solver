@@ -1,32 +1,16 @@
-let rnd = ()=>Math.floor(Math.random() * 3)-1 ;
+const SIZE=3
 
-// get the completed array
-
-let puzzle = {
-    grid: getSolvedGrid(3),
-};
-
-function randomPuzzle(puzzle){
-    puzzle.zero = findZero(puzzle.grid);
-    return randomize(puzzle,100);
-}
-
-puzzle = randomPuzzle(puzzle);
+let puzzle = randomPuzzle(200);
 const original = copyPuzzle(puzzle)
-
-function solveIt(puzzle){
-    puzzle.zero = findZero(puzzle.grid);
-    puzzle.code = getpuzzlecode(puzzle);
-    puzzle.eval = evaluate(puzzle);
-    puzzle.path = '';
-    puzzle.gen=0;
-
-    return solve(puzzle)
-}
-
 printGrid(original.grid)
+
 let solution = solveIt(puzzle);
 console.log(solution)
+
+window.onload = ()=>{
+    renderPuzzle(original)
+}
+
 
 
 
@@ -37,4 +21,13 @@ console.log(solution)
     // change the array
     // render the array
 
-// a i solve the latest array
+
+function solveIt(puzzle){
+    puzzle.zero = findZero(puzzle.grid);
+    puzzle.code = getpuzzlecode(puzzle);
+    puzzle.eval = evaluate(puzzle);
+    puzzle.path = '';
+    puzzle.gen=0;
+
+    return solve(puzzle)
+}

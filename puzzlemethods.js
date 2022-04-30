@@ -42,11 +42,17 @@ function move(puzzle,moveY, moveX){
     return newpuzzle;
 }
 
-function randomize(puzzle,MOVES){
-    let newpuzzle = copyPuzzle(puzzle);
+function randomPuzzle(MOVES){
+    let newpuzzle = {};
+    newpuzzle.grid = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8]
+    ];
+    newpuzzle.zero = findZero(newpuzzle.grid);
     for (let n=0;n<MOVES;n++){
-        let x=rnd();
-        let y = rnd();
+        let x=Math.floor(Math.random()*3)-1;
+        let y =Math.floor(Math.random()*3)-1;
         const newnewpuzzle = move(newpuzzle,y,x)
         if(newnewpuzzle!=null) newpuzzle=newnewpuzzle;
     };
