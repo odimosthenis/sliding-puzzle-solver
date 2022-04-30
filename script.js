@@ -5,27 +5,14 @@ const containerSize = 300;
 const blockSize =  containerSize/size;
 
 window.onload = ()=>{
-    const container = document.querySelector('#container');
-
-    for (let i=0;i<size*size;i++){
-
-        nowPuzzle.push({
-            value: i,
-            position: i,
-            imageI: i,
-            x: getCol(i,size) * blockSize  ,
-            y: getRow(i,size) * blockSize
-        })
-    }
-
-    const rand = getRandomVals(size);
-    for(let i=0;i<size*size;i++){
-        nowPuzzle[i].value = rand[i];
-    }
-
-    renderPuzzlie(container)
-
+    shuffle();
+    document.querySelector('#shuffle').addEventListener('click',()=>{
+        const container = document.querySelector('#container');
+        container.innerHTML = '';
+        shuffle()
+    })
 }
+
 
 function renderPuzzlie(container){
     for (let item of nowPuzzle){
@@ -63,7 +50,6 @@ function getRandomVals(size){
 
 function move(item,block,container){
     const smooth = 100
-    console.log(nowPuzzle)
 
     let nowRow = getRow(item.position, size)
     let nowCol = getCol(item.position, size)
@@ -74,7 +60,6 @@ function move(item,block,container){
     let upRow = (nowRow<=0) ? -1 : nowRow - 1;
     let downRow = (nowRow>=size-1) ? -1 : nowRow + 1;
 
-    console.log(leftCol, rightCol, downRow, upRow)
     if ( leftCol!=-1 && nowPuzzle[cordsToI(nowRow,leftCol,size)].value == 0){
         block.classList.add('moveLeft');
         setTimeout(()=>{
@@ -116,18 +101,45 @@ function move(item,block,container){
         },smooth)
     }
 
+    if(completed(nowPuzzle)){
+        console.log('done')
+    }
     
 }
 
 function completed(puzzle){
 
-    for (let i=0;i<puzzle.length;i++){
-        for (let j=0;j<puzzle[i].length;j++){
-            console.log(puzzle[i][j])
+    for (let i=0;i<3;i++){
+        for (let j=0;j<3;j++){
+           if (puzzle[cordsToI(i,j,size)].position!=i*3+j){
+               return false;
+           }
         }
     }
 
-    return false;
+    return true;
 }
 
 window.comp = completed
+
+function shuffle(){
+    nowPuzzle=[]
+    for (let i=0;i<size*size;i++){
+
+        nowPuzzle.push({
+            value: i,
+            position: i,
+            imageI: i,
+            x: getCol(i,size) * blockSize  ,
+            y: getRow(i,size) * blockSize
+        })
+    }
+
+    const rand = getRandomVals(size);
+    for(let i=0;i<size*size;i++){
+        nowPuzzle[i].value = rand[i];
+    }
+
+    renderPuzzlie(container)
+}
+

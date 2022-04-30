@@ -74,3 +74,17 @@
     background-color: gray ;
     z-index: 11;
 }
+
+.btn{
+    font-size: 18px;
+    padding: 10px;
+    background-color: rgb(103, 93, 236);
+    color: white;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.btn:hover{
+    cursor: pointer;
+    background-color: rgb(54, 39, 211);;
+}
