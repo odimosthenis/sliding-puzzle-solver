@@ -5,17 +5,27 @@ let rnd = ()=>Math.floor(Math.random() * 3)-1 ;
 let puzzle = {
     grid: getSolvedGrid(3),
 };
-puzzle.zero = findZero(puzzle.grid);
-puzzle = randomize(puzzle,100);
 
-puzzle.zero = findZero(puzzle.grid);
-puzzle.code = getpuzzlecode(puzzle);
-puzzle.eval = evaluate(puzzle);
-puzzle.path = '';
-puzzle.gen=0;
+function randomPuzzle(puzzle){
+    puzzle.zero = findZero(puzzle.grid);
+    return randomize(puzzle,100);
+}
 
-printGrid(puzzle.grid);
-let solution = solve(puzzle);
+puzzle = randomPuzzle(puzzle);
+const original = copyPuzzle(puzzle)
+
+function solveIt(puzzle){
+    puzzle.zero = findZero(puzzle.grid);
+    puzzle.code = getpuzzlecode(puzzle);
+    puzzle.eval = evaluate(puzzle);
+    puzzle.path = '';
+    puzzle.gen=0;
+
+    return solve(puzzle)
+}
+
+printGrid(original.grid)
+let solution = solveIt(puzzle);
 console.log(solution)
 
 

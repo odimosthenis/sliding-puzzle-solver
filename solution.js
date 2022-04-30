@@ -23,8 +23,6 @@ function solve(initial){
         count++;
         const now = open.pop();
         if(isSolved(now)){
-            console.log("Solution!: ");
-            printGrid(now.grid)
             return now;
         }
 

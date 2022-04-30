@@ -6,7 +6,7 @@ function copyPuzzle(puzzle){
     newpuzzle.code = getpuzzlecode(newpuzzle);
     newpuzzle.eval = evaluate(newpuzzle);
     newpuzzle.path = puzzle.path;
-    newpuzzle.gen = puzzle.path;
+    newpuzzle.gen = puzzle.gen;
 
     return newpuzzle;
 }
@@ -83,7 +83,7 @@ function evaluate(puzzle){
 }
 
 function comparePuzzles(a,b){
-    if(a.eval > b.eval) return -1;
-    else if (a.eval < b.eval) return 1;
+    if(a.eval +a.gen > b.eval +b.gen) return -1;
+    else if (a.eval +a.gen < b.eval + +b.gen) return 1;
     else return 0
 }
