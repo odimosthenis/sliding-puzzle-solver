@@ -43,6 +43,7 @@
     transition: transform 100ms linear;
     background-image: url('img/pica.png');
     background-size: 300px 300px;
+    background-repeat: no-repeat;
     width: 98px;
     height: 98px;
 
@@ -53,21 +54,21 @@
     border-color: red;
 }
 
-.moveLeft{
+.R{
     transform: translateX(-100px);
 }
 
-.moveRight{
+.L{
     transform: translateX(100px);
 }
 
 
-.moveDown{
+.U{
     transform: translateY(100px);
 }
 
 
-.moveUp{
+.D{
     transform: translateY(-100px);
 }
 
