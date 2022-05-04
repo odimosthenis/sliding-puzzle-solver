@@ -9,18 +9,63 @@
     <script src="solution.js"></script>
     <script src="paint.js"></script>
     <script src="main.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://odimosthenis.github.io/GitBar/gitbar.css">
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        .gitBar{
+            display: block;
+            background-image: linear-gradient(rgb(26, 30, 34), black);
+            padding: 0;
+            display: flex;
+            margin: 0;
+        }
+
+        .gitBar > a{
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #gitRef{
+            color: white;
+            font-size: 20px;
+        }
+    </style>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="grid">
-        <div id="container">
 
-        </div>
-        <img id="model" src="img/pica.png" >
+    <div class="gitBar">
+        <a href="https://github.com/odimosthenis/sliding-puzzle-solver" >
+            <div>
+                <img src="https://play-lh.googleusercontent.com/PCpXdqvUWfCW1mXhH1Y_98yBpgsWxuTSTofy3NGMo9yBTATDyzVkqU580bfSln50bFU"
+                height="50px">
+            </div>
+    
+            <div>
+                <span id="gitRef" > Show on GitHub</span>
+            </div>
+        </a>
     </div>
-   
-    <button class="btn" id="shuffle">shuffle!</button>
-    <button class="btn" id="solve">A.I. Solve</button>
+
+    <div class="wrapper">
+        <div class="grid">
+            <div id="container">
+    
+            </div>
+            <img id="model" src="img/pica.png" >
+        </div>
+       
+        <button class="btn" id="shuffle">shuffle!</button>
+        <button class="btn" id="solve">A.I. Solve</button>
+    </div>
+
+    
     
 </body>
 </html>
